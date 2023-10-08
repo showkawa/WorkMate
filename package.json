@@ -1,9 +1,6 @@
 {
   "description": "Your all-in-one work solution. Work smarter with WorkMate. Unlocking your full potential.",
-  "keywords": [
-
-  ],
-
+  "keywords": [],
   "license": "",
   "author": {
     "name": "",
@@ -81,9 +78,14 @@
     }
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.12",
+    "@mui/material": "^5.14.12",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.8",
     "electron-updater": "^6.1.4",
+    "langchain": "^0.0.163",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0"
