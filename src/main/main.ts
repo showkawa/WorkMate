@@ -31,6 +31,29 @@ ipcMain.on('ipc-example', async (event, arg) => {
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
+ipcMain.on('create-new-window', async (event, arg) => {
+  console.log('----create-new-window----', arg);
+  if(arg) {
+    const newWindow = new BrowserWindow({
+      width: 800,
+      height: 600,
+      show: false,
+      webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true,
+      },
+    });
+    newWindow.loadURL(arg);
+    newWindow.show();
+
+    newWindow.on('closed', async (e: Event) => {
+      console.log('----sub window closed----');
+      e.preventDefault(); // Prevent the window from closing
+      newWindow.destroy();
+    });
+  }
+});
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -78,6 +101,9 @@ const createWindow = async () => {
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
+      nodeIntegration: true,
+      // contextIsolation: false,
+      webSecurity: false,
     },
   });
 
